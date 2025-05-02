@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  windows:
+    container_name: windows
+    image: mcr.microsoft.com/windows/servercore:ltsc2019
+    ports:
+      - "3389:3389"
+      - "8006:8006"
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - windows_data:/mnt/data
+    restart: unless-stopped
+    networks:
+      - default
+
+volumes:
+  windows_data:
+    driver: local
+
+networks:
+  default:
+    external: false
